@@ -7,6 +7,7 @@ import 'screens/registation_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
 import 'screens/home_screen.dart';
+import 'screens/create_tweet_screen.dart';
 
 void main()async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -35,7 +36,7 @@ class MyApp extends StatelessWidget {
         LoginScreen.id: (context) => LoginScreen(),
         RegistrationScreen.id: (context)=> RegistrationScreen(),
         HomeScreen.id: (context)=> HomeScreen(),
-
+        CreateTweetScreen.id: (context)=> CreateTweetScreen(),
       },
     );
   }

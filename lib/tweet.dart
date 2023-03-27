@@ -1,6 +1,6 @@
 class Tweet {
-  final String name;
+  late String tweettext;
 
-  Tweet({required this.name,});
+  Tweet({required this.tweettext,});
 
 }

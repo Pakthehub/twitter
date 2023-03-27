@@ -11,8 +11,6 @@ class TweetBox extends StatelessWidget {
 
   final String tweet;
 
-  final _firestore = FirebaseFirestore.instance;
-  late User loggedInUser;
 
 
   @override
