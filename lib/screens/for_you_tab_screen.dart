@@ -8,9 +8,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-
-
-
 class ForYouScreen extends StatefulWidget {
   static const String id = 'for_you_tab_screen';
 
@@ -19,20 +16,15 @@ class ForYouScreen extends StatefulWidget {
 }
 
 class _ForYouScreenState extends State<ForYouScreen> {
-
   final _firestore = FirebaseFirestore.instance;
   final _auth = FirebaseAuth.instance;
-  late User loggedInUser;
-  late  String tweetsText;
-  late String tweetMaker;
+  User? loggedInUser;
 
   @override
   void initState() {
     getCurrentUser();
     super.initState();
   }
-
-
 
   void getCurrentUser() async {
     try {
@@ -46,46 +38,41 @@ class _ForYouScreenState extends State<ForYouScreen> {
     }
   }
 
-
-
+  List<Tweet> tweetList = [];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body:  StreamBuilder<QuerySnapshot>(
-        stream: _firestore.collection('tweets').snapshots(),
-        builder: (context, snapshot) {
-          if (!snapshot.hasData) {
-            return Center(
-              child: CircularProgressIndicator(
-                backgroundColor: Colors.lightBlueAccent,
-              ),
-            );
-          }
-          {
-            final tweets = snapshot.data?.docs;
-            for (var tweet in tweets!) {
-              final data = tweet.data() as Map;
-              tweetsText = data['text'];
-              tweetMaker = data['tweetmaker'];
-
-
-              final currentUser = loggedInUser.email;
-
-
-
+      body: StreamBuilder<QuerySnapshot>(
+          stream: _firestore.collection('tweets').snapshots(),
+          builder: (context, snapshot) {
+            if (!snapshot.hasData) {
+              return Center(
+                child: CircularProgressIndicator(
+                  backgroundColor: Colors.lightBlueAccent,
+                ),
+              );
             }
 
-              return ListView.builder(
-                itemBuilder: (context, index) {
-                  return TweetBox(
-                      tweet: tweetsText= context.watch<TwitterData>().tweet[index].tweettext);
-                },
-                itemCount: context.watch<TwitterData>().tweet.length,
-              );
-          }
-        }
-    ),
+            var list = snapshot.data!.docs
+                .map((data) => Tweet(text: data['text'], maker: data['text']))
+                .toList();
+
+            return ListView.builder(
+              itemBuilder: (context, index) {
+                final tweet = list[index];
+                return TweetBox(tweet: tweet.text ?? '');
+              },
+              itemCount: list.length,
+            );
+          }),
     );
   }
+}
+
+class Tweet {
+  String? text;
+  String? maker;
+
+  Tweet({required this.text, required this.maker});
 }

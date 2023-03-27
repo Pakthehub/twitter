@@ -5,12 +5,10 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-
 class TweetBox extends StatelessWidget {
   TweetBox({required this.tweet});
 
   final String tweet;
-
 
 
   @override
@@ -62,8 +60,9 @@ class TweetBox extends StatelessWidget {
                     circleColor: CircleColor(
                         start: Color(0xff00ddff), end: Color(0xff0099cc)),
                     bubblesColor: BubblesColor(
-                        dotPrimaryColor: Color(0xff33b5e5),
-                        dotSecondaryColor: Color(0xff0099cc)),
+                      dotPrimaryColor: Color(0xff33b5e5),
+                      dotSecondaryColor: Color(0xff0099cc),
+                    ),
                     likeBuilder: (bool isLiked) {
                       return FaIcon(
                         FontAwesomeIcons.retweet,
