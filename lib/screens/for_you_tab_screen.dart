@@ -55,6 +55,7 @@ class _ForYouScreenState extends State<ForYouScreen> {
             }
 
             var list = snapshot.data!.docs
+                //TODO: Use to Json here, should be Tweet.Json()
                 .map((data) => Tweet(text: data['text'], maker: data['text']))
                 .toList();
 
@@ -75,4 +76,10 @@ class Tweet {
   String? maker;
 
   Tweet({required this.text, required this.maker});
+
+
+  //TODO: create from Json
+
+
+  //TODO: Create to Json.
 }
