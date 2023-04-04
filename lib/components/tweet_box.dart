@@ -10,7 +10,6 @@ class TweetBox extends StatelessWidget {
 
   final String tweet;
 
-
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -55,41 +54,18 @@ class TweetBox extends StatelessWidget {
                   SizedBox(
                     width: 40.0,
                   ),
-                  LikeButton(
-                    size: 20,
-                    circleColor: CircleColor(
-                        start: Color(0xff00ddff), end: Color(0xff0099cc)),
-                    bubblesColor: BubblesColor(
-                      dotPrimaryColor: Color(0xff33b5e5),
-                      dotSecondaryColor: Color(0xff0099cc),
-                    ),
-                    likeBuilder: (bool isLiked) {
-                      return FaIcon(
-                        FontAwesomeIcons.retweet,
-                        color: isLiked ? Colors.green : Colors.grey,
-                        size: 15,
-                      );
-                    },
+                  FaIcon(
+                    FontAwesomeIcons.retweet,
+                    color: Colors.grey,
+                    size: 15,
                   ),
                   SizedBox(
                     width: 40.0,
                   ),
-                  LikeButton(
-                    size: 20,
-                    circleColor: CircleColor(
-                        start: Color(0xff00ddff), end: Color(0xff0099cc)),
-                    bubblesColor: BubblesColor(
-                        dotPrimaryColor: Color(0xff33b5e5),
-                        dotSecondaryColor: Color(0xff0099cc)),
-                    likeBuilder: (bool isLiked) {
-                      return FaIcon(
-                        isLiked
-                            ? FontAwesomeIcons.solidHeart
-                            : FontAwesomeIcons.heart,
-                        color: isLiked ? Colors.red : Colors.grey,
-                        size: 15,
-                      );
-                    },
+                  FaIcon(
+                    FontAwesomeIcons.heart,
+                    color: Colors.grey,
+                    size: 15,
                   ),
                 ],
               )

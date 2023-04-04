@@ -54,10 +54,8 @@ class _ForYouScreenState extends State<ForYouScreen> {
               );
             }
 
-            var list = snapshot.data!.docs
-                //TODO: Use to Json here, should be Tweet.Json()
-                .map((data) => Tweet(text: data['text'], maker: data['text']))
-                .toList();
+            var list = snapshot.data!.docs.map((data) => Tweet.fromJson(data.data()as Map<String, dynamic>)).toList();
+            var jsonList = list.map((tweet) => tweet.toJson()).toList();
 
             return ListView.builder(
               itemBuilder: (context, index) {
@@ -77,9 +75,23 @@ class Tweet {
 
   Tweet({required this.text, required this.maker});
 
+ factory Tweet.fromJson(Map<String, dynamic> json){
+   return Tweet(
+       text : json['text'],
+       maker : json['maker'],
+   );
+ }
 
-  //TODO: create from Json
+  Map<String, dynamic> toJson() {
+   return{
+   'text' : text,
+   'maker' : maker,
+   };
+  }
 
 
-  //TODO: Create to Json.
 }
+//TODO: create from Json
+
+
+//TODO: Create to Json.
